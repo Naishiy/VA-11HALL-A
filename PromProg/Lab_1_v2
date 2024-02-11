@@ -1,0 +1,50 @@
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+import java.util.Scanner;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        /*Задание 1.6*/
+        Scanner in = new Scanner(System.in);
+        System.out.print("Текущая дата и время: ");
+        String date1 = in.nextLine();
+        //SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+        //Date date1 = new Date(System.currentTimeMillis());
+        String name = "Аверин, Маликова, Сафонова";
+        String date2 = "05.02.2024, 14:58";
+        System.out.println("\nРазработчики: " + name + "\nДата и время получения задания: " + date2 + "\nДата и время сдачи задания: " + date1 + "\n");
+        //System.out.println("\nРазработчики: " + name + "\nДата и время получения задания: " + date2 + "\nДата и время сдачи задания: " + formatter.format(date1) + "\n");
+
+        /*Задание 2.6*/
+        System.out.print("Сколько чисел вы хотите ввести: ");
+        int n = in.nextInt();
+
+        int[] array = new int [n];
+        for(int i = 0; i < n; i++)
+        {
+            i++;
+            System.out.print("Число " + i + " = ");
+            i--;
+            array[i] = in.nextInt();
+        }
+        System.out.println("Простыми являются:");
+
+        for(int i = 0; i < n; i++){
+            boolean f = true;
+
+            for (int a = 2; a < array[i]; a++){
+
+                if(array[i] % a == 0){
+                    f = false;
+                    break;
+                }
+            }
+
+            if(f){
+                System.out.print(array[i] + " ");
+            }
+        }
+    }
+}
