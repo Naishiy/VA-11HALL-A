@@ -4,27 +4,20 @@ public class Lab2Z2 {
 
     public static void main() {
 
-        /*Считывание двоичного числа и задание переменных для цикла*/
-        System.out.print("\nВведите двоичное число: ");
         Scanner in = new Scanner(System.in);
-        String line = in.nextLine();
-        char[] number = line.toCharArray();
+        long number;
+        int start;
+        int end;
 
-        int res = 0;
-        int digit = 1;
+        System.out.println("Начальная СС: ");
+        start = Integer.parseInt(in.nextLine());
 
-        /*Прогонка всего двоичного числа, если встретилась "1", то сложение результата со значением соответствующим разряду*/
-        for (int i = line.length() - 1; i >=0; i--){
+        System.out.println("Конечная СС:");
+        end = in.nextInt();
 
-            if (number[i] == '1') {
+        System.out.println("Введите число: ");
+        number = Long.parseLong(in.nextLine(), start);
 
-                res += digit;
-            }
-            digit *= 2;
-        }
-
-        /*Вывод ответа*/
-        System.out.print("Число в десятичной СС: ");
-        System.out.println(res);
+        System.out.println("Полученое число " + Long.toString(number, end));
     }
 }
