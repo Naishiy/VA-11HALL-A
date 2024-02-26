@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class Lab3Z2 {
 
@@ -22,34 +23,49 @@ public class Lab3Z2 {
         byte countRectangles = 0;
         byte countArbitraryes = 0;
 
+        ArrayList<Quadrilaterals> squares = new ArrayList<>();
+        ArrayList<Quadrilaterals> rhombs = new ArrayList<>();
+        ArrayList<Quadrilaterals> rectangles = new ArrayList<>();
+        ArrayList<Quadrilaterals> arbitraryes = new ArrayList<>();
+
+        ArrayList<Double> squaresPerimeter = new ArrayList<>();
+        ArrayList<Double> rhombsPerimeter = new ArrayList<>();
+        ArrayList<Double> rectanglesPerimeter = new ArrayList<>();
+        ArrayList<Double> arbitraryesPerimeter = new ArrayList<>();
+
+        ArrayList<Double> squaresArea = new ArrayList<>();
+        ArrayList<Double> rhombsArea = new ArrayList<>();
+        ArrayList<Double> rectanglesArea = new ArrayList<>();
+        ArrayList<Double> arbitraryesArea = new ArrayList<>();
+
         for (Quadrilaterals quadrilateral: quadrilaterals) {
 //            System.out.println(quadrilateral.getArea() + " " + quadrilateral.getPerimeter() +
 //                    " " + quadrilateral.getType());
             if (quadrilateral.getType().equals("square")){
                 countSquares++;
-                Quadrilaterals[] squares = new Quadrilaterals[countSquares];
-                squares[countSquares-1] = quadrilateral;
+                squares.add(quadrilateral);
+                squaresPerimeter.add(quadrilateral.getPerimeter());
+                squaresArea.add(quadrilateral.getArea());
             }
             else {
                 if (quadrilateral.getType().equals("rhomb")) {
                     countRhombs++;
-                    Quadrilaterals[] rhombs = new Quadrilaterals[countRhombs];
-                    rhombs[countRhombs-1] = quadrilateral;
+                    rhombs.add(quadrilateral);
+                    rhombsPerimeter.add(quadrilateral.getPerimeter());
+                    rhombsArea.add(quadrilateral.getArea());
                 }
                 else {
                     if (quadrilateral.getType().equals("rectangle")) {
                         countRectangles++;
-                        Quadrilaterals[] rectangles = new Quadrilaterals[countRectangles];
-                        rectangles[countRectangles-1] = quadrilateral;
+                        rectangles.add(quadrilateral);
+                        rectanglesPerimeter.add(quadrilateral.getPerimeter());
+                        rectanglesArea.add(quadrilateral.getArea());
                     }
                     else {
                         countArbitraryes++;
-                        Quadrilaterals[] arbitraryes = new Quadrilaterals[countArbitraryes];
-                        arbitraryes[countArbitraryes-1] = quadrilateral;
-                        for(Quadrilaterals s: arbitraryes) {
-                            System.out.println(s);
-                        }
-
+                        arbitraryes.add(quadrilateral);
+                        arbitraryesPerimeter.add(quadrilateral.getPerimeter());
+                        arbitraryesArea.add(quadrilateral.getArea());
                     }
                 }
             }
@@ -59,7 +75,13 @@ public class Lab3Z2 {
                 countRhombs + ", Прямоугольников - " + countRectangles +
                 ", Произвольных (в т.ч. трапеций) - " + countArbitraryes);
 
+        /* min area */
 
+        /* max area */
+
+        /* min perimeter */
+
+        /* max perimeter */
 
     }
 }
