@@ -13,7 +13,7 @@ public class Lab2Z2 {
         start = Integer.parseInt(in.nextLine());
 
         System.out.println("Конечная СС:");
-        end = in.nextInt();
+        end = Integer.parseInt(in.nextLine());
 
         System.out.println("Введите число: ");
         number = Long.parseLong(in.nextLine(), start);
