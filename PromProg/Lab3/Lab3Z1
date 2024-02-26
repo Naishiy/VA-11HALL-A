@@ -1,0 +1,184 @@
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Random;
+
+public class Lab3Z1 {
+
+    public static void main() {
+        /*Задание 1.7*/
+
+        Random random = new Random();
+        Phone[] phones = new Phone[5];
+        phones[0] = new Phone(random.nextInt(666)-1, "Иванов", "Иван", "Иванович",
+                "Москва", "1111222233334444", random.nextDouble(2500.0)-500.0,
+                random.nextDouble(1500.0)-1.0, random.nextDouble(60.0)-0.1,
+                random.nextDouble(30.0)-0.1);
+        phones[1] = new Phone(random.nextInt(666)-1, "Петров", "Петр", "Петрович",
+                "Санкт-Петербург", "2222333344445555" , random.nextDouble(2500.0)-500.0,
+                random.nextDouble(1500.0)-1.0, random.nextDouble(60.0)-0.1,
+                random.nextDouble(30.0)-0.1);
+        phones[2] = new Phone(random.nextInt(666)-1, "Сидоров", "Алексей", "Павлович",
+                "Новосибирск", "3333444455556666" , random.nextDouble(2500.0)-500.0,
+                random.nextDouble(1500.0)-1.0, random.nextDouble(60.0)-0.1,
+                random.nextDouble(30.0)-0.1);
+        phones[3] = new Phone(random.nextInt(666)-1, "Козлова", "Анна", "Ивановна",
+                "Екатеринбург", "4444555566667777" , random.nextDouble(2500.0)-500.0,
+                random.nextDouble(1500.0)-1.0, random.nextDouble(60.0)-0.1,
+                random.nextDouble(30.0)-0.1);
+        phones[4] = new Phone(random.nextInt(666)-1, "Смирнов", "Дмитрий",
+                "Александрович", "Казань", "5555666677778888" ,
+                random.nextDouble(2500.0)-500.0, random.nextDouble(1500.0)-1.0,
+                random.nextDouble(60.0)-0.1,
+                random.nextDouble(30.0)-0.1);
+
+        //phones[0].setAddress("Рязань");
+        // Вывод сведений об абонентах, у которых время внутригородских разговоров превышает заданное
+        double localCallTimeThreshold = 13.0;
+        System.out.println("Абоненты с временем внутригородских разговоров, превышающим " + localCallTimeThreshold + " минут:");
+        for (Phone phone : phones) {
+            if (phone.getLocalCallTime() > localCallTimeThreshold) {
+                System.out.println(phone);
+            }
+        }
+        System.out.println();
+
+        // Вывод сведений об абонентах, которые пользовались междугородной связью
+        System.out.println("Абоненты, пользовавшиеся междугородной связью:");
+        for (Phone phone : phones) {
+            if (phone.getInternationalCallTime() > 0) {
+                System.out.println(phone);
+            }
+        }
+        System.out.println();
+
+        // Вывод сведений об абонентах в алфавитном порядке
+        Arrays.sort(phones, (p1, p2) -> p1.getLastName().compareTo(p2.getLastName()));
+        System.out.println("Абоненты в алфавитном порядке:");
+        for (Phone phone : phones) {
+            System.out.println(phone);
+        }
+
+    }
+}
+
+class Phone {
+    private int id;
+    private String lastName;
+    private String firstName;
+    private String patronymic;
+    private String address;
+    private String creditCardNumber;
+    private double debit;
+    private double credit;
+    private double localCallTime;
+    private double internationalCallTime;
+
+    public Phone(int id, String lastName, String firstName, String patronymic,
+                 String address, String creditCardNumber, double debit, double credit,
+                 double localCallTime, double internationalCallTime) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.address = address;
+        this.creditCardNumber = creditCardNumber;
+        this.debit = debit;
+        this.credit = credit;
+        this.localCallTime = localCallTime;
+        this.internationalCallTime = internationalCallTime;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getPatronymic() {
+        return this.patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCreditCardNumber() {
+        return this.creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public double getDebit() {
+        return this.debit;
+    }
+
+    public void setDebit(double debit) {
+        this.debit = debit;
+    }
+
+    public double getCredit() {
+        return this.credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+    public double getLocalCallTime() {
+        return this.localCallTime;
+    }
+
+    public void setLocalCallTime(double localCallTime) {
+        this.localCallTime = localCallTime;
+    }
+
+    public double getInternationalCallTime() {
+        return this.internationalCallTime;
+    }
+
+    public void setInternationalCallTime(double internationalCallTime) {
+        this.internationalCallTime = internationalCallTime;
+    }
+
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return  id + ": " +
+                lastName + ' ' +
+                firstName + ' ' +
+                patronymic + ", " +
+                address + ", " +
+                creditCardNumber + ", " +
+                df.format(debit) + " руб., " +
+                df.format(credit) + " руб., " +
+                df.format(localCallTime) + " мин, " +
+                df.format(internationalCallTime) + " мин";
+    }
+}
