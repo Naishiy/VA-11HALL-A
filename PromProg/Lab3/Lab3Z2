@@ -1,0 +1,144 @@
+import java.text.DecimalFormat;
+
+public class Lab3Z2 {
+
+    public static void main() {
+        /*Задание 2.8*/
+
+        Quadrilaterals[] quadrilaterals = new Quadrilaterals[5];
+        quadrilaterals[0] = new Quadrilaterals(4.0, 4.0, 4.0, 4.0,
+                5.65685, 5.65685, 1.5708);
+        quadrilaterals[1] = new Quadrilaterals(3.0, 4.0, 3.0, 4.0,
+                5.0, 5.0, 0.82030475);
+        quadrilaterals[2] = new Quadrilaterals(2.0, 1.0, 3.0, 1.0,
+                5.0, 6.0, 0.234543);
+        quadrilaterals[3] = new Quadrilaterals(1.0, 1.0, 1.0, 1.0,
+                1.4142, 3.4142, 1.5708);
+        quadrilaterals[4] = new Quadrilaterals(7.23,1.32,4.31, 9.11,
+                5.01, 12.03, 0.23452);
+
+        byte countSquares = 0;
+        byte countRhombs = 0;
+        byte countRectangles = 0;
+        byte countArbitraryes = 0;
+
+        for (Quadrilaterals quadrilateral: quadrilaterals) {
+//            System.out.println(quadrilateral.getArea() + " " + quadrilateral.getPerimeter() +
+//                    " " + quadrilateral.getType());
+            if (quadrilateral.getType().equals("square")){
+                countSquares++;
+                Quadrilaterals[] squares = new Quadrilaterals[countSquares];
+                squares[countSquares-1] = quadrilateral;
+            }
+            else {
+                if (quadrilateral.getType().equals("rhomb")) {
+                    countRhombs++;
+                    Quadrilaterals[] rhombs = new Quadrilaterals[countRhombs];
+                    rhombs[countRhombs-1] = quadrilateral;
+                }
+                else {
+                    if (quadrilateral.getType().equals("rectangle")) {
+                        countRectangles++;
+                        Quadrilaterals[] rectangles = new Quadrilaterals[countRectangles];
+                        rectangles[countRectangles-1] = quadrilateral;
+                    }
+                    else {
+                        countArbitraryes++;
+                        Quadrilaterals[] arbitraryes = new Quadrilaterals[countArbitraryes];
+                        arbitraryes[countArbitraryes-1] = quadrilateral;
+                        for(Quadrilaterals s: arbitraryes) {
+                            System.out.println(s);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        System.out.println("Квадратов - " + countSquares + ", Ромбов - " +
+                countRhombs + ", Прямоугольников - " + countRectangles +
+                ", Произвольных (в т.ч. трапеций) - " + countArbitraryes);
+
+
+
+    }
+}
+
+class Quadrilaterals {
+    private double side1;
+    private double side2;
+    private double side3;
+    private double side4;
+    private double diagonal1;
+    private double diagonal2;
+    private double alpha;
+
+    public Quadrilaterals(double side1, double side2, double side3, double side4, double diagonal1,
+                          double diagonal2, double alpha) {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+        this.side4 = side4;
+        this.diagonal1 = diagonal1;
+        this.diagonal2 = diagonal2;
+        this.alpha = alpha;
+    }
+
+    public double getPerimeter() {
+
+        return side1 + side2 + side3 + side4;
+    }
+
+    public double getArea() {
+        /* square rectangle rhomb arbitrary */
+        return 0.5 * diagonal1 * diagonal2 * Math.sin(alpha);
+    }
+
+    public String getType() {
+        String id = new String();
+        if (side1 == side2) {
+            if (side3 == side4) {
+                if (diagonal1 == diagonal2) {
+                    id = "square";
+                }
+                else {
+                    id = "rhomb";
+                }
+            }
+            else {
+                id = "arbitrary";
+            }
+        }
+        else {
+            if (side1 == side3){
+                if (side2 == side4) {
+                    if (diagonal1 == diagonal2) {
+                        id = "rectangle";
+                    }
+                    else {
+                        id = "arbitrary";
+                    }
+                }
+                else {
+                    id = "arbitrary";
+                }
+            }
+            else {
+                id = "arbitrary";
+            }
+        }
+
+        return id;
+    }
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return  this.getType() + ": " +
+                df.format(side1) + ' ' +
+                df.format(side2) + ' ' +
+                df.format(side3) + ' ' +
+                df.format(side4) + ' ' +
+                df.format(diagonal1) + ' ' +
+                df.format(diagonal2) + ' ' +
+                df.format(alpha);
+    }
+}
