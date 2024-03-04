@@ -11,47 +11,17 @@ public class Lab3Z3 {
     public static void main() {
         /*Задание 3.6*/
 
-        //Circle[] circles = new Circle[3];
-
         List<Circle> circles = new ArrayList();
 
-        Circle circles0 = new Circle(new Rational(BigInteger.valueOf(1), BigInteger.valueOf(2)),
-                new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)),
-                new Rational(BigInteger.valueOf(5), BigInteger.valueOf(2)));
+        creatingObjects(circles);
 
-        Circle circles1 = new Circle(new Rational(BigInteger.valueOf(2), BigInteger.valueOf(3)),
-                new Rational(BigInteger.valueOf(4), BigInteger.valueOf(5)),
-                new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)));
+        whoseCentersOneLine(circles);
 
-        Circle circles2 = new Circle(new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)),
-                new Rational(BigInteger.valueOf(5), BigInteger.valueOf(6)),
-                new Rational(BigInteger.valueOf(1), BigInteger.valueOf(2)));
+        MinMaxAreaAndPerimeter(circles);
 
-        circles.add(circles0);
-        circles.add(circles1);
-        circles.add(circles2);
+    }
 
-        // Определение окружностей с центрами на одной прямой
-
-        List<Circle> onOneLine = new ArrayList();
-        double exp = 1e-15;
-
-        for(int c = 0; c < circles.size() - 2; c++){
-            double equationOfLine = Math.abs((circles.get(c+1).getX() - circles.get(c).getX())/(circles.get(c+2).getX() - circles.get(c+1).getX()) -
-                    (circles.get(c+1).getY() - circles.get(c).getY())/(circles.get(c+2).getY() - circles.get(c+1).getY()));
-            if(equationOfLine <= exp){
-                onOneLine.add(circles.get(c));
-                onOneLine.add(circles.get(c+1));
-                onOneLine.add(circles.get(c+2));
-            }
-        }
-
-        System.out.println("Окружности, центры которых лежат на одной прямой: ");
-        System.out.println(onOneLine);
-        System.out.println();
-
-        // Определение наибольшего и наименьшего по площади (периметру) объекта
-
+    private static void MinMaxAreaAndPerimeter(List<Circle> circles) {
         Comparator maxArea = new MaxAreaObject();
         Collections.sort(circles, maxArea);
         System.out.println("Круг с наибольшей площадью: " + circles.get(0));
@@ -76,7 +46,43 @@ public class Lab3Z3 {
         System.out.println("Круг с наименьшим периметром: " + circles.get(0));
         System.out.println("Периметр: " + circles.get(0).getArea());
         System.out.println();
+    }
 
+    private static void whoseCentersOneLine(List<Circle> circles) {
+        List<Circle> onOneLine = new ArrayList();
+        double exp = 1e-15;
+
+        for(int c = 0; c < circles.size() - 2; c++){
+            double equationOfLine = Math.abs((circles.get(c+1).getX() - circles.get(c).getX())/(circles.get(c+2).getX() - circles.get(c+1).getX()) -
+                    (circles.get(c+1).getY() - circles.get(c).getY())/(circles.get(c+2).getY() - circles.get(c+1).getY()));
+            if(equationOfLine <= exp){
+                onOneLine.add(circles.get(c));
+                onOneLine.add(circles.get(c+1));
+                onOneLine.add(circles.get(c+2));
+            }
+        }
+
+        System.out.println("Окружности, центры которых лежат на одной прямой: ");
+        System.out.println(onOneLine);
+        System.out.println();
+    }
+
+    private static void creatingObjects(List<Circle> circles) {
+        Circle circles0 = new Circle(new Rational(BigInteger.valueOf(1), BigInteger.valueOf(2)),
+                new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)),
+                new Rational(BigInteger.valueOf(5), BigInteger.valueOf(2)));
+
+        Circle circles1 = new Circle(new Rational(BigInteger.valueOf(2), BigInteger.valueOf(3)),
+                new Rational(BigInteger.valueOf(4), BigInteger.valueOf(5)),
+                new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)));
+
+        Circle circles2 = new Circle(new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)),
+                new Rational(BigInteger.valueOf(5), BigInteger.valueOf(6)),
+                new Rational(BigInteger.valueOf(1), BigInteger.valueOf(2)));
+
+        circles.add(circles0);
+        circles.add(circles1);
+        circles.add(circles2);
     }
 }
 
