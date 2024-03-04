@@ -2,7 +2,6 @@ import java.lang.invoke.SwitchPoint;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Lab3Z2 {
 
@@ -10,16 +9,8 @@ public class Lab3Z2 {
         /*Задание 2.8*/
 
         Quadrilaterals[] quadrilaterals = new Quadrilaterals[5];
-        quadrilaterals[0] = new Quadrilaterals(4.0, 4.0, 4.0, 4.0,
-                5.65685, 5.65685, 1.5708);
-        quadrilaterals[1] = new Quadrilaterals(3.0, 4.0, 3.0, 4.0,
-                5.0, 5.0, 0.82030475);
-        quadrilaterals[2] = new Quadrilaterals(2.0, 1.0, 3.0, 1.0,
-                5.0, 6.0, 0.234543);
-        quadrilaterals[3] = new Quadrilaterals(1.0, 1.0, 1.0, 1.0,
-                1.4142, 3.4142, 1.5708);
-        quadrilaterals[4] = new Quadrilaterals(7.23,1.32,4.31, 9.11,
-                5.01, 12.03, 0.23452);
+
+        creatingObjects(quadrilaterals);
 
         byte countSquares = 0;
         byte countRhombs = 0;
@@ -42,8 +33,6 @@ public class Lab3Z2 {
         ArrayList<Double> arbitraryesArea = new ArrayList<>();
 
         for (Quadrilaterals quadrilateral: quadrilaterals) {
-//            System.out.println(quadrilateral.getArea() + " " + quadrilateral.getPerimeter() +
-//                    " " + quadrilateral.getType());
             if (quadrilateral.getType().equals("square")){
                 countSquares++;
                 squares.add(quadrilateral);
@@ -74,12 +63,164 @@ public class Lab3Z2 {
             }
         }
 
+        printingCountingOfQuadrilaterals(countSquares, countRhombs, countRectangles, countArbitraryes);
+
+        minArea(squaresArea, squares, rhombsArea, rhombs, rectanglesArea, rectangles, arbitraryesArea, arbitraryes);
+
+        maxArea(squaresArea, squares, rhombsArea, rhombs, rectanglesArea, rectangles, arbitraryesArea, arbitraryes);
+
+        minPerimeter(squaresPerimeter, squares, rhombsPerimeter, rhombs, rectanglesPerimeter, rectangles, arbitraryesPerimeter, arbitraryes);
+
+        maxPerimeter(squaresPerimeter, squares, rhombsPerimeter, rhombs, rectanglesPerimeter, rectangles, arbitraryesPerimeter, arbitraryes);
+
+    }
+
+    private static void printingCountingOfQuadrilaterals(byte countSquares, byte countRhombs, byte countRectangles, byte countArbitraryes) {
         System.out.println("Квадратов - " + countSquares + ", Ромбов - " +
                 countRhombs + ", Прямоугольников - " + countRectangles +
                 ", Произвольных (в т.ч. трапеций) - " + countArbitraryes);
         System.out.println();
+    }
 
-        /* min area */
+    private static void maxPerimeter(ArrayList<Double> squaresPerimeter, ArrayList<Quadrilaterals> squares, ArrayList<Double> rhombsPerimeter, ArrayList<Quadrilaterals> rhombs, ArrayList<Double> rectanglesPerimeter, ArrayList<Quadrilaterals> rectangles, ArrayList<Double> arbitraryesPerimeter, ArrayList<Quadrilaterals> arbitraryes) {
+        System.out.println("Квадрат с максимальным периметром: ");
+        squaresPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals s: squares){
+            if(s.getPerimeter() == squaresPerimeter.get(0)){
+                System.out.println(s);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(squaresPerimeter.get(0));
+        System.out.println();
+
+        System.out.println("Ромб с максимальным периметром: ");
+        rhombsPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rhombs){
+            if(r.getPerimeter() == rhombsPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(rhombsPerimeter.get(0));
+        System.out.println();
+
+        System.out.println("Прямоугольник с максимальным периметром: ");
+        rectanglesPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rectangles){
+            if(r.getPerimeter() == rectanglesPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(rectanglesPerimeter.get(0));
+        System.out.println();
+
+        System.out.println("Четырехугольник с максимальным периметром: ");
+        arbitraryesPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals a: arbitraryes){
+            if(a.getPerimeter() == arbitraryesPerimeter.get(0)){
+                System.out.println(a);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(arbitraryesPerimeter.get(0));
+        System.out.println();
+    }
+
+    private static void minPerimeter(ArrayList<Double> squaresPerimeter, ArrayList<Quadrilaterals> squares, ArrayList<Double> rhombsPerimeter, ArrayList<Quadrilaterals> rhombs, ArrayList<Double> rectanglesPerimeter, ArrayList<Quadrilaterals> rectangles, ArrayList<Double> arbitraryesPerimeter, ArrayList<Quadrilaterals> arbitraryes) {
+        System.out.println("Квадрат с минимальным периметром: ");
+        Collections.sort(squaresPerimeter);
+        for(Quadrilaterals s: squares){
+            if(s.getPerimeter() == squaresPerimeter.get(0)){
+                System.out.println(s);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(squaresPerimeter.get(0));
+        System.out.println();
+
+        System.out.println("Ромб с минимальным периметром: ");
+        Collections.sort(rhombsPerimeter);
+        for(Quadrilaterals r: rhombs){
+            if(r.getPerimeter() == rhombsPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(rhombsPerimeter.get(0));
+        System.out.println();
+
+        System.out.println("Прямоугольник с минимальным периметром: ");
+        Collections.sort(rectanglesPerimeter);
+        for(Quadrilaterals r: rectangles){
+            if(r.getPerimeter() == rectanglesPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(rectanglesPerimeter.get(0));
+        System.out.println();
+
+        System.out.println("Четырехугольник с минимальным периметром: ");
+        Collections.sort(arbitraryesPerimeter);
+        for(Quadrilaterals a: arbitraryes){
+            if(a.getPerimeter() == arbitraryesPerimeter.get(0)){
+                System.out.println(a);
+            }
+        }
+        System.out.println("Периметр: ");
+        System.out.println(arbitraryesPerimeter.get(0));
+        System.out.println();
+    }
+
+    private static void maxArea(ArrayList<Double> squaresArea, ArrayList<Quadrilaterals> squares, ArrayList<Double> rhombsArea, ArrayList<Quadrilaterals> rhombs, ArrayList<Double> rectanglesArea, ArrayList<Quadrilaterals> rectangles, ArrayList<Double> arbitraryesArea, ArrayList<Quadrilaterals> arbitraryes) {
+        System.out.println("Квадарат с макcимальной площадью: ");
+        squaresArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals s: squares){
+            if(s.getArea() == squaresArea.get(0)){
+                System.out.println(s);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(squaresArea.get(0));
+        System.out.println();
+
+        System.out.println("Ромб с макcимальной площадью: ");
+        rhombsArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rhombs){
+            if(r.getArea() == rhombsArea.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(rhombsArea.get(0));
+        System.out.println();
+
+        System.out.println("Прямоугольник с макcимальной площадью: ");
+        rectanglesArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rectangles){
+            if(r.getArea() == rectanglesArea.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(rectanglesArea.get(0));
+        System.out.println();
+
+        System.out.println("Четырехугольник с макcимальной площадью: ");
+        arbitraryesArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals a: arbitraryes){
+            if(a.getArea() == arbitraryesArea.get(0)){
+                System.out.println(a);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(arbitraryesArea.get(0));
+        System.out.println();
+    }
+
+    private static void minArea(ArrayList<Double> squaresArea, ArrayList<Quadrilaterals> squares, ArrayList<Double> rhombsArea, ArrayList<Quadrilaterals> rhombs, ArrayList<Double> rectanglesArea, ArrayList<Quadrilaterals> rectangles, ArrayList<Double> arbitraryesArea, ArrayList<Quadrilaterals> arbitraryes) {
         System.out.println("Квадрат с минимальной площадью: ");
         Collections.sort(squaresArea);
         for(Quadrilaterals s: squares){
@@ -124,111 +265,19 @@ public class Lab3Z2 {
         System.out.println("Площадь: ");
         System.out.println(arbitraryesArea.get(0));
         System.out.println();
+    }
 
-
-        /* max area */
-
-        squaresArea.sort(Collections.reverseOrder());
-        for(Quadrilaterals s: squares){
-            if(s.getArea() == squaresArea.get(0)){
-                System.out.println(s);
-            }
-        }
-        System.out.println(squaresArea.get(0));
-
-        rhombsArea.sort(Collections.reverseOrder());
-        for(Quadrilaterals r: rhombs){
-            if(r.getArea() == rhombsArea.get(0)){
-                System.out.println(r);
-            }
-        }
-        System.out.println(rhombsArea.get(0));
-
-        rectanglesArea.sort(Collections.reverseOrder());
-        for(Quadrilaterals r: rectangles){
-            if(r.getArea() == rectanglesArea.get(0)){
-                System.out.println(r);
-            }
-        }
-        System.out.println(rectanglesArea.get(0));
-
-        arbitraryesArea.sort(Collections.reverseOrder());
-        for(Quadrilaterals a: arbitraryes){
-            if(a.getArea() == arbitraryesArea.get(0)){
-                System.out.println(a);
-            }
-        }
-        System.out.println(arbitraryesArea.get(0));
-
-
-        /* min perimeter */
-
-        Collections.sort(squaresPerimeter);
-        for(Quadrilaterals s: squares){
-            if(s.getPerimeter() == squaresPerimeter.get(0)){
-                System.out.println(s);
-            }
-        }
-        System.out.println(squaresPerimeter.get(0));
-
-        Collections.sort(rhombsPerimeter);
-        for(Quadrilaterals r: rhombs){
-            if(r.getPerimeter() == rhombsPerimeter.get(0)){
-                System.out.println(r);
-            }
-        }
-        System.out.println(rhombsPerimeter.get(0));
-
-        Collections.sort(rectanglesPerimeter);
-        for(Quadrilaterals r: rectangles){
-            if(r.getPerimeter() == rectanglesPerimeter.get(0)){
-                System.out.println(r);
-            }
-        }
-        System.out.println(rectanglesPerimeter.get(0));
-
-        Collections.sort(arbitraryesPerimeter);
-        for(Quadrilaterals a: arbitraryes){
-            if(a.getPerimeter() == arbitraryesPerimeter.get(0)){
-                System.out.println(a);
-            }
-        }
-        System.out.println(arbitraryesPerimeter.get(0));
-
-        /* max perimeter */
-
-        squaresPerimeter.sort(Collections.reverseOrder());
-        for(Quadrilaterals s: squares){
-            if(s.getPerimeter() == squaresPerimeter.get(0)){
-                System.out.println(s);
-            }
-        }
-        System.out.println(squaresPerimeter.get(0));
-
-        rhombsPerimeter.sort(Collections.reverseOrder());
-        for(Quadrilaterals r: rhombs){
-            if(r.getPerimeter() == rhombsPerimeter.get(0)){
-                System.out.println(r);
-            }
-        }
-        System.out.println(rhombsPerimeter.get(0));
-
-        rectanglesPerimeter.sort(Collections.reverseOrder());
-        for(Quadrilaterals r: rectangles){
-            if(r.getPerimeter() == rectanglesPerimeter.get(0)){
-                System.out.println(r);
-            }
-        }
-        System.out.println(rectanglesPerimeter.get(0));
-
-        arbitraryesPerimeter.sort(Collections.reverseOrder());
-        for(Quadrilaterals a: arbitraryes){
-            if(a.getPerimeter() == arbitraryesPerimeter.get(0)){
-                System.out.println(a);
-            }
-        }
-        System.out.println(arbitraryesPerimeter.get(0));
-
+    private static void creatingObjects(Quadrilaterals[] quadrilaterals) {
+        quadrilaterals[0] = new Quadrilaterals(4.0, 4.0, 4.0, 4.0,
+                5.65685, 5.65685, 1.5708);
+        quadrilaterals[1] = new Quadrilaterals(3.0, 4.0, 3.0, 4.0,
+                5.0, 5.0, 0.82030475);
+        quadrilaterals[2] = new Quadrilaterals(2.0, 1.0, 3.0, 1.0,
+                5.0, 6.0, 0.234543);
+        quadrilaterals[3] = new Quadrilaterals(1.0, 1.0, 1.0, 1.0,
+                1.4142, 3.4142, 1.5708);
+        quadrilaterals[4] = new Quadrilaterals(7.23,1.32,4.31, 9.11,
+                5.01, 12.03, 0.23452);
     }
 }
 
