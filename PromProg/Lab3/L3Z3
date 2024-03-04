@@ -1,0 +1,140 @@
+import java.math.BigInteger;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Lab3Z3 {
+
+    public static void main() {
+        /*Задание 3.6*/
+
+        //Circle[] circles = new Circle[3];
+
+        List<Circle> circles = new List.;
+
+        Circle circles0 = new Circle(new Rational(BigInteger.valueOf(1), BigInteger.valueOf(2)),
+                new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)),
+                new Rational(BigInteger.valueOf(5), BigInteger.valueOf(2)));
+
+        Circle circles1 = new Circle(new Rational(BigInteger.valueOf(2), BigInteger.valueOf(3)),
+                new Rational(BigInteger.valueOf(4), BigInteger.valueOf(5)),
+                new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)));
+
+        Circle circles2 = new Circle(new Rational(BigInteger.valueOf(3), BigInteger.valueOf(4)),
+                new Rational(BigInteger.valueOf(5), BigInteger.valueOf(6)),
+                new Rational(BigInteger.valueOf(1), BigInteger.valueOf(2)));
+
+        circles.add(circles0);
+        circles.add(circles1);
+        circles.add(circles2);
+
+        // Определение групп окружностей с центрами на одной прямой
+
+        // Определение наибольшего и наименьшего по площади (периметру) объекта
+        Comparator minArea = new MinAreaObject();
+        Collections.sort(circles, minArea);
+        System.out.println("Круг с наименьшей площадью: " + circles.get(0));
+        System.out.println();
+
+    }
+}
+
+class Rational {
+    private BigInteger numerator;
+    private BigInteger denominator;
+
+    public Rational(BigInteger numerator, BigInteger denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator;
+    }
+
+    public BigInteger getNumerator() {
+        return this.numerator;
+    }
+
+    public BigInteger getDenominator() {
+        return this.denominator;
+    }
+
+    public Rational add(Rational other) {
+        BigInteger num = numerator.multiply(other.denominator).add(other.numerator.multiply(denominator));
+        BigInteger den = denominator.multiply(other.denominator);
+        return new Rational(num, den);
+    }
+
+    public Rational subtract(Rational other) {
+        BigInteger num = numerator.multiply(other.denominator).subtract(other.numerator.multiply(denominator)) ;
+        BigInteger den = denominator.multiply(other.denominator);
+        return new Rational(num, den);
+    }
+
+    public Rational multiply(Rational other) {
+        BigInteger num = numerator.multiply(other.numerator);
+        BigInteger den = denominator.multiply(other.denominator);
+        return new Rational(num, den);
+    }
+
+    public Rational divide(Rational other) {
+        BigInteger num = numerator.multiply(other.denominator);
+        BigInteger den = denominator.multiply(other.numerator);
+        return new Rational(num, den);
+    }
+}
+
+class Circle {
+    private Rational x; // Координата x центра окружности
+    private Rational y; // Координата y центра окружности
+    private Rational radius; // Радиус окружности
+
+    public Circle(Rational x, Rational y, Rational radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+    }
+
+    public double getArea() {
+        double r = radius.getNumerator().doubleValue() / radius.getDenominator().doubleValue();
+        return Math.PI * r * r;
+    }
+
+    public double getPerimeter() {
+        double r = radius.getNumerator().doubleValue() / radius.getDenominator().doubleValue();
+        return 2 * Math.PI * r;
+    }
+
+    public String toString(){
+        return "(" + x + ',' + y + "), радиус = " + radius;
+    }
+}
+
+class MaxAreaObject implements Comparator<Circle> {
+
+    public int compare(Circle o1, Circle o2){
+        return (int) (o1.getArea() - o2.getArea());
+    }
+
+}
+
+class MinAreaObject implements Comparator<Circle> {
+
+    public int compare(Circle o1, Circle o2){
+        return (int) (o2.getArea() - o1.getArea());
+    }
+
+}
+
+class MaxPerimeterObject implements Comparator<Circle> {
+
+    public int compare(Circle o1, Circle o2){
+        return (int) (o1.getPerimeter() - o2.getPerimeter());
+    }
+
+}
+
+class MinPerimeterObject implements Comparator<Circle> {
+
+    public int compare(Circle o1, Circle o2){
+        return (int) (o2.getPerimeter() - o1.getPerimeter());
+    }
+
+}
