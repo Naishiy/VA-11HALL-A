@@ -1,0 +1,14 @@
+public class Main {
+    public static void main(String[] args) {
+
+        Lab3Z1 class1 = new Lab3Z1();
+        Lab3Z2 class2 = new Lab3Z2();
+        Lab3Z3 class3 = new Lab3Z3();
+
+        class1.main();
+        class2.main();
+        class3.main();
+    }
+}
+
+
