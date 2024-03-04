@@ -9,6 +9,23 @@ public class Lab3Z1 {
 
         Random random = new Random();
         Phone[] phones = new Phone[5];
+        creatingDatabase(phones, random);
+
+        // Вывод сведений об абонентах, у которых время внутригородских разговоров превышает заданное
+        printingOnIntercityCalls(phones);
+        System.out.println();
+
+        // Вывод сведений об абонентах, которые пользовались междугородной связью
+        printingOnLongDistanceCalls(phones);
+        System.out.println();
+
+        // Вывод сведений об абонентах в алфавитном порядке
+        printingInAlphabeticalOrder(phones);
+        System.out.println();
+
+    }
+
+    private static void creatingDatabase(Phone[] phones, Random random) {
         phones[0] = new Phone(random.nextInt(666)-1, "Иванов", "Иван", "Иванович",
                 "Москва", "1111222233334444", random.nextDouble(2500.0)-500.0,
                 random.nextDouble(1500.0)-1.0, random.nextDouble(60.0)-0.1,
@@ -30,9 +47,26 @@ public class Lab3Z1 {
                 random.nextDouble(2500.0)-500.0, random.nextDouble(1500.0)-1.0,
                 random.nextDouble(60.0)-0.1,
                 random.nextDouble(30.0)-0.1);
+    }
 
-        //phones[0].setAddress("Рязань");
-        // Вывод сведений об абонентах, у которых время внутригородских разговоров превышает заданное
+    private static void printingInAlphabeticalOrder(Phone[] phones) {
+        Arrays.sort(phones, (p1, p2) -> p1.getLastName().compareTo(p2.getLastName()));
+        System.out.println("Абоненты в алфавитном порядке:");
+        for (Phone phone : phones) {
+            System.out.println(phone);
+        }
+    }
+
+    private static void printingOnLongDistanceCalls(Phone[] phones) {
+        System.out.println("Абоненты, пользовавшиеся междугородной связью:");
+        for (Phone phone : phones) {
+            if (phone.getInternationalCallTime() > 0) {
+                System.out.println(phone);
+            }
+        }
+    }
+
+    private static void printingOnIntercityCalls(Phone[] phones) {
         double localCallTimeThreshold = 13.0;
         System.out.println("Абоненты с временем внутригородских разговоров, превышающим " + localCallTimeThreshold + " минут:");
         for (Phone phone : phones) {
@@ -40,24 +74,6 @@ public class Lab3Z1 {
                 System.out.println(phone);
             }
         }
-        System.out.println();
-
-        // Вывод сведений об абонентах, которые пользовались междугородной связью
-        System.out.println("Абоненты, пользовавшиеся междугородной связью:");
-        for (Phone phone : phones) {
-            if (phone.getInternationalCallTime() > 0) {
-                System.out.println(phone);
-            }
-        }
-        System.out.println();
-
-        // Вывод сведений об абонентах в алфавитном порядке
-        Arrays.sort(phones, (p1, p2) -> p1.getLastName().compareTo(p2.getLastName()));
-        System.out.println("Абоненты в алфавитном порядке:");
-        for (Phone phone : phones) {
-            System.out.println(phone);
-        }
-
     }
 }
 
