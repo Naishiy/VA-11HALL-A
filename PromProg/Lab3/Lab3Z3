@@ -1,8 +1,10 @@
+import java.lang.Math;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ArrayList;
+
 
 public class Lab3Z3 {
 
@@ -29,9 +31,24 @@ public class Lab3Z3 {
         circles.add(circles1);
         circles.add(circles2);
 
-        // Определение групп окружностей с центрами на одной прямой
+        // Определение окружностей с центрами на одной прямой
 
+        List<Circle> onOneLine = new ArrayList();
+        double exp = 1e-15;
 
+        for(int c = 0; c < circles.size() - 2; c++){
+            double equationOfLine = Math.abs((circles.get(c+1).getX() - circles.get(c).getX())/(circles.get(c+2).getX() - circles.get(c+1).getX()) -
+                    (circles.get(c+1).getY() - circles.get(c).getY())/(circles.get(c+2).getY() - circles.get(c+1).getY()));
+            if(equationOfLine <= exp){
+                onOneLine.add(circles.get(c));
+                onOneLine.add(circles.get(c+1));
+                onOneLine.add(circles.get(c+2));
+            }
+        }
+
+        System.out.println("Окружности, центры которых лежат на одной прямой: ");
+        System.out.println(onOneLine);
+        System.out.println();
 
         // Определение наибольшего и наименьшего по площади (периметру) объекта
 
@@ -94,6 +111,14 @@ class Circle {
         this.x = x;
         this.y = y;
         this.radius = radius;
+    }
+
+    public double getX() {
+        return x.getRational();
+    }
+
+    public double getY() {
+        return y.getRational();
     }
 
     public double getArea() {
