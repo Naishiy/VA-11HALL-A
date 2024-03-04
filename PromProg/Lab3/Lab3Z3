@@ -31,6 +31,8 @@ public class Lab3Z3 {
 
         // Определение групп окружностей с центрами на одной прямой
 
+
+
         // Определение наибольшего и наименьшего по площади (периметру) объекта
 
         Comparator maxArea = new MaxAreaObject();
@@ -81,30 +83,6 @@ class Rational {
     public double getRational(){
         return this.numerator.doubleValue() / this.denominator.doubleValue();
     }
-
-//    public Rational add(Rational other) {
-//        BigInteger num = numerator.multiply(other.denominator).add(other.numerator.multiply(denominator));
-//        BigInteger den = denominator.multiply(other.denominator);
-//        return new Rational(num, den);
-//    }
-//
-//    public Rational subtract(Rational other) {
-//        BigInteger num = numerator.multiply(other.denominator).subtract(other.numerator.multiply(denominator)) ;
-//        BigInteger den = denominator.multiply(other.denominator);
-//        return new Rational(num, den);
-//    }
-//
-//    public Rational multiply(Rational other) {
-//        BigInteger num = numerator.multiply(other.numerator);
-//        BigInteger den = denominator.multiply(other.denominator);
-//        return new Rational(num, den);
-//    }
-//
-//    public Rational divide(Rational other) {
-//        BigInteger num = numerator.multiply(other.denominator);
-//        BigInteger den = denominator.multiply(other.numerator);
-//        return new Rational(num, den);
-//    }
 }
 
 class Circle {
