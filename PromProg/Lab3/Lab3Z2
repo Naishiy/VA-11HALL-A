@@ -1,5 +1,8 @@
+import java.lang.invoke.SwitchPoint;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Lab3Z2 {
 
@@ -74,14 +77,157 @@ public class Lab3Z2 {
         System.out.println("Квадратов - " + countSquares + ", Ромбов - " +
                 countRhombs + ", Прямоугольников - " + countRectangles +
                 ", Произвольных (в т.ч. трапеций) - " + countArbitraryes);
+        System.out.println();
 
         /* min area */
+        System.out.println("Квадрат с минимальной площадью: ");
+        Collections.sort(squaresArea);
+        for(Quadrilaterals s: squares){
+            if(s.getArea() == squaresArea.get(0)){
+                System.out.println(s);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(squaresArea.get(0));
+        System.out.println();
+
+
+        System.out.println("Ромб с минимальной площадью: ");
+        Collections.sort(rhombsArea);
+        for(Quadrilaterals r: rhombs){
+            if(r.getArea() == rhombsArea.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(rhombsArea.get(0));
+        System.out.println();
+
+        System.out.println("Прямоугольник с минимальной площадью: ");
+        Collections.sort(rectanglesArea);
+        for(Quadrilaterals r: rectangles){
+            if(r.getArea() == rectanglesArea.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(rectanglesArea.get(0));
+        System.out.println();
+
+        System.out.println("Четырехугольник с минимальной площадью: ");
+        Collections.sort(arbitraryesArea);
+        for(Quadrilaterals a: arbitraryes){
+            if(a.getArea() == arbitraryesArea.get(0)){
+                System.out.println(a);
+            }
+        }
+        System.out.println("Площадь: ");
+        System.out.println(arbitraryesArea.get(0));
+        System.out.println();
+
 
         /* max area */
 
+        squaresArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals s: squares){
+            if(s.getArea() == squaresArea.get(0)){
+                System.out.println(s);
+            }
+        }
+        System.out.println(squaresArea.get(0));
+
+        rhombsArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rhombs){
+            if(r.getArea() == rhombsArea.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println(rhombsArea.get(0));
+
+        rectanglesArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rectangles){
+            if(r.getArea() == rectanglesArea.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println(rectanglesArea.get(0));
+
+        arbitraryesArea.sort(Collections.reverseOrder());
+        for(Quadrilaterals a: arbitraryes){
+            if(a.getArea() == arbitraryesArea.get(0)){
+                System.out.println(a);
+            }
+        }
+        System.out.println(arbitraryesArea.get(0));
+
+
         /* min perimeter */
 
+        Collections.sort(squaresPerimeter);
+        for(Quadrilaterals s: squares){
+            if(s.getPerimeter() == squaresPerimeter.get(0)){
+                System.out.println(s);
+            }
+        }
+        System.out.println(squaresPerimeter.get(0));
+
+        Collections.sort(rhombsPerimeter);
+        for(Quadrilaterals r: rhombs){
+            if(r.getPerimeter() == rhombsPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println(rhombsPerimeter.get(0));
+
+        Collections.sort(rectanglesPerimeter);
+        for(Quadrilaterals r: rectangles){
+            if(r.getPerimeter() == rectanglesPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println(rectanglesPerimeter.get(0));
+
+        Collections.sort(arbitraryesPerimeter);
+        for(Quadrilaterals a: arbitraryes){
+            if(a.getPerimeter() == arbitraryesPerimeter.get(0)){
+                System.out.println(a);
+            }
+        }
+        System.out.println(arbitraryesPerimeter.get(0));
+
         /* max perimeter */
+
+        squaresPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals s: squares){
+            if(s.getPerimeter() == squaresPerimeter.get(0)){
+                System.out.println(s);
+            }
+        }
+        System.out.println(squaresPerimeter.get(0));
+
+        rhombsPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rhombs){
+            if(r.getPerimeter() == rhombsPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println(rhombsPerimeter.get(0));
+
+        rectanglesPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals r: rectangles){
+            if(r.getPerimeter() == rectanglesPerimeter.get(0)){
+                System.out.println(r);
+            }
+        }
+        System.out.println(rectanglesPerimeter.get(0));
+
+        arbitraryesPerimeter.sort(Collections.reverseOrder());
+        for(Quadrilaterals a: arbitraryes){
+            if(a.getPerimeter() == arbitraryesPerimeter.get(0)){
+                System.out.println(a);
+            }
+        }
+        System.out.println(arbitraryesPerimeter.get(0));
 
     }
 }
@@ -132,18 +278,8 @@ class Quadrilaterals {
             }
         }
         else {
-            if (side1 == side3){
-                if (side2 == side4) {
-                    if (diagonal1 == diagonal2) {
-                        id = "rectangle";
-                    }
-                    else {
-                        id = "arbitrary";
-                    }
-                }
-                else {
-                    id = "arbitrary";
-                }
+            if ((side1 == side3)&&(side2 == side4)&&(diagonal1 == diagonal2)){
+                id = "rectangle";
             }
             else {
                 id = "arbitrary";
@@ -154,7 +290,7 @@ class Quadrilaterals {
     }
     public String toString() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return  this.getType() + ": " +
+        return  //this.getType() + ": " +
                 df.format(side1) + ' ' +
                 df.format(side2) + ' ' +
                 df.format(side3) + ' ' +
