@@ -10,7 +10,7 @@ A = [[0, 1, 1, 0, 0, 1, 1],  # x1
      [0, 0, 1, 0, 1, 1, 0],  # x4
      [0, 0, 0, 1, 0, 1, 1],  # x5
      [1, 0, 0, 1, 1, 0, 0],  # x6
-     [1, 0, 0, 0, 1, 0, 0]]  # x7
+     [1, 0, 0, 0, 1, 0, 1]]  # x7
 
 def adj_to_inc(adj_matrix): #Смежность в инцидентность
 
@@ -23,7 +23,7 @@ def adj_to_inc(adj_matrix): #Смежность в инцидентность
     for i in range(n): #Перебор строк
         for j in range(i + 1, n): #Перебор столбцов
             if adj_matrix[i][j] != 0: #Если элемент ij матрицы смежности не равен нулю:
-                inc_matrix[i][edge_index] = 1 #Присваивание значения элементам матрицы инцидентности
+                inc_matrix[i][edge_index] = -1 #Присваивание значения элементам матрицы инцидентности
                 inc_matrix[j][edge_index] = 1
                 edge_index += 1 #Счетчик ребер +1
 
@@ -40,12 +40,28 @@ def inc_to_adj(inc_matrix): #Инцидентность в смежность
         for vertex in range(n): #Прохождение по строкам
             if inc_matrix[vertex][edge] == 1: #Если элемент матрицы инцидентности = 1
                 for vertex2 in range(n): #Прохождение по строкам снова
-                    if inc_matrix[vertex2][edge] == 1 and vertex != vertex2: #Если элемент матрицы инцидентности = 1 и мы не на главной диагонали:
+                    if (inc_matrix[vertex2][edge] == 1 and vertex != vertex2) or (inc_matrix[vertex2][edge] == - 1 and vertex != vertex2): #Если элемент матрицы инцидентности = 1 и мы не на главной диагонали:
                         adj_matrix[vertex][vertex2] = 1 #Присваиваем значения элементам матрицы смежности
                         adj_matrix[vertex2][vertex] = 1
                         break
 
     return adj_matrix
+
+############################################################
+#Защита исполнение
+
+def Gx(Inc, xi):
+
+    indexes = [i for i, v in enumerate(Inc[xi]) if v == -1]
+
+    Gx = []
+
+    for a in range(len(indexes)):
+        for i in range(len(Inc)):
+            if Inc[i][indexes[a]] == 1:
+                Gx.append(i+1)
+
+    return Gx
 
 ############################################################
 print('Начальная Матрица Смежности:')
@@ -62,7 +78,7 @@ print()
 Inc = adj_to_inc(A)
 
 print('Матрица Инцидентности:')
-print(f'    a1  a2  a3  a4  a5  a6  a7  a8  a9  a10')
+print(f'    u1  u2  u3  u4  u5  u6  u7  u8  u9  u10')
 
 for I in range(n):
     print(f'x{I + 1}', end='  ')
@@ -84,3 +100,19 @@ for I in range(n):
         print(Adj[I][J], end='\t')
     print()
 print()
+
+#         u1  u2  u3  u4  u5  u6  u7  u8  u9  u10
+Inc =  [[-1, -1, -1, -1,  0,  0,  0,  0,  0,  0],   #x1
+         [1,  0,  0,  0, -1,  0,  0,  0,  0,  0],	#x2
+         [0,  1,  0,  0,  1, -1,  0,  0,  0,  0],	#x3
+         [0,  0,  0,  0,  0,  1, -1, -1,  0,  0],   #x4
+         [0,  0,  0,  0,  0,  0,  1,  0, -1, -1],   #x5
+         [0,  0,  1,  0,  0,  0,  0,  1,  1,  0],   #x6
+         [0,  0,  0,  1,  0,  0,  0,  0,  0,  1]]   #x7
+
+xi = int(input('Введите i для xi: ')) -1
+gx = Gx(Inc, xi)
+print(f'G-(x{xi+1})= ( ', end='')
+for i in range(len(gx)):
+    print(f'x{gx[i]}', end=' ')
+print(')')
