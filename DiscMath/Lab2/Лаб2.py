@@ -11,10 +11,10 @@ def DynamicProg(matrix):
 
     n = len(matrix)
 
-    start = int(input('Введите номер x начала: ')) - 1
-    end = int(input('Введите номер x конца: ')) - 1
+    start = int(input('Введите номер x начала: ')) - 1 #Началао пути
+    end = int(input('Введите номер x конца: ')) - 1 #Конец пути
 
-    print('\nНачальная матрица смежности для метода динамического программирования:')
+    print('\nНачальная матрица смежности для метода динамического программирования:') #Вывод матрицы
     print(f'    x1  x2  x3  x4  x5  x6  x7')
 
     for I in range(n):
@@ -25,11 +25,11 @@ def DynamicProg(matrix):
         print()
     print()
 
-    marks = [-1] * n
-    marks[start] = 0
+    marks = [-1] * n #Отметки для вершин
+    marks[start] = 0 #Индекс начала
 
-    for i in range(n):
-        av = []
+    for i in range(n): #Цикл поиска отметок
+        av = [] #Массив для отметок
 
         for j in range(n):
             if matrix[j][i] != 0:
@@ -39,9 +39,9 @@ def DynamicProg(matrix):
         if not av:
             continue
 
-        min_av = min(av)
-        marks[i] = min_av
-
+        min_av = min(av) #Минимальный путь из всех ометок на данной итерации
+        marks[i] = min_av #Добавление отметки в итоговый массив пути
+    #Вывод ответа
     print(f"Метки всех вершин")
     print(marks)
     print(f"Кратчайший путь из x{start+1} в x{end+1}: {marks[end]}")
@@ -51,13 +51,13 @@ def DynamicProg(matrix):
 
 
 def TopSort():
-
+    #Ввод начальной матрицы    
     matrix = [[0, 1, 0, 1, 0],
               [0, 0, 1, 0, 0],
               [0, 0, 0, 0, 1],
               [0, 0, 1, 0, 1],
               [0, 0, 0, 0, 0]]
-
+    #Вывод начальной матрицы
     print('\nМатрица смежности для топологической сортировки:')
     print(f'    x1  x2  x3  x4  x5')
 
@@ -67,7 +67,7 @@ def TopSort():
         for J in range(len(matrix)):
             print(A[I][J], end='\t')
         print()
-
+    #Форматирование данных под алгоритм и создание массивов с отметками посещения вершин
     n, m = 5, 6
     g = [[] for i in range(n)]
     colors = [0 for i in range(n)]
@@ -75,7 +75,7 @@ def TopSort():
     tout = []
 
     g = [[1, 3], [2], [4], [2, 4], []]
-
+    #Проверка на присутствие цикла в графе
     def dfs1(v):
 
         colors[v] = 1
@@ -91,7 +91,7 @@ def TopSort():
         colors[v] = 2
 
         return False
-
+    #Основной цикл сортировки
     def dfs2(v):
 
         visited[v] = True
