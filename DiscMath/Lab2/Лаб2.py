@@ -14,7 +14,7 @@ def DynamicProg(matrix):
     start = int(input('Введите номер x начала: ')) - 1
     end = int(input('Введите номер x конца: ')) - 1
 
-    print('Начальная Матрица Смежности:')
+    print('\nНачальная матрица смежности для метода динамического программирования:')
     print(f'    x1  x2  x3  x4  x5  x6  x7')
 
     for I in range(n):
@@ -45,21 +45,36 @@ def DynamicProg(matrix):
     print(f"Метки всех вершин")
     print(marks)
     print(f"Кратчайший путь из x{start+1} в x{end+1}: {marks[end]}")
+    print()
 
     return 0
 
 
 def TopSort():
 
-    n, m = [int(i) for i in input().split()]
+    matrix = [[0, 1, 0, 1, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 0, 1],
+              [0, 0, 1, 0, 1],
+              [0, 0, 0, 0, 0]]
+
+    print('\nМатрица смежности для топологической сортировки:')
+    print(f'    x1  x2  x3  x4  x5')
+
+    for I in range(len(matrix)):
+        print(f'x{I + 1}', end='  ')
+
+        for J in range(len(matrix)):
+            print(A[I][J], end='\t')
+        print()
+
+    n, m = 5, 6
     g = [[] for i in range(n)]
     colors = [0 for i in range(n)]
     visited = [False for i in range(n)]
     tout = []
 
-    for i in range(m):
-        a, b = [int(i) - 1 for i in input().split()]
-        g[a].append(b)
+    g = [[1, 3], [2], [4], [2, 4], []]
 
     def dfs1(v):
 
@@ -98,10 +113,14 @@ def TopSort():
             result = True
             break
 
-    print(result)
+    print('\nЕсть ли в графе цикл:',result)
+
     for i in range(n):
         if not visited[i]:
             dfs2(i)
+
+    print('Решение:\n')
+
     for vertex in tout[::-1]:
         print(vertex + 1)
 
